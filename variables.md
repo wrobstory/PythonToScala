@@ -1,6 +1,6 @@
-##Python to Scala: 
+#Python to Scala: 
 
-#Variables
+##Variables
 
 Python: 
 ```python
