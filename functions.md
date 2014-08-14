@@ -130,7 +130,7 @@ scala> sum_args(Array(1, 2, 3): _*)
 res161: Int = 6
 ```
 
-I should note here that Scala does have a special "Procedure" type function that returns no value, wherein the `=` sign is omitted
+I should note here that Scala does have a special "Procedure" type function that returns no value, wherein the `=` sign is omitted:
 Scala:
 ```scala
 def proc_func(x:String, y:String) {print(x + y)}
