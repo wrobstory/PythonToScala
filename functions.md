@@ -85,6 +85,7 @@ scala> make_arr("orange", drink="coffee", "banana")
 <console>:19: error: not enough arguments for method make_arr: (x: String, y: String, fruit: String, drink: String)Array[String].
 Unspecified value parameter y.
               make_arr("orange", drink="coffee", "banana")
+```
 
 Scala supports variable arguments in a similar way to Python's *args, but with a little less flexibility- Scala just knows that its being given a sequence of arguments that it can operate on. 
 
