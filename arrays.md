@@ -52,8 +52,7 @@ int_list.extend((5, 6, 7))
 5
 >>> int_list
 [1, 2]
-
-
+```
 
 
 Scala: 
