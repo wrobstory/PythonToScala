@@ -25,17 +25,13 @@ scala> baz
 res60: String = Apples and Oranges.
 
 
-/**
-* In Scala, vals are immutable
-*/
+// In Scala, vals are immutable
 scala> baz = "Only Grapes."
 <console>:13: error: reassignment to val
        baz = "Only Grapes."
 
 
-/**
-* Create a var instead
-*/
+// Create a var instead
 scala> var baz = "Apples and Oranges."
 baz: String = Apples and Oranges.
 
@@ -58,9 +54,7 @@ scala> val foo, bar = Array(1, 2, 3)
 foo: Array[Int] = Array(1, 2, 3)
 bar: Array[Int] = Array(1, 2, 3)
 
-/**
-* foo and bar reference different pieces of memory; changing one will not change the other. 
-*/
+// foo and bar reference different pieces of memory; changing one will not change the other. 
 scala> bar(0) = 4
 
 scala> bar
