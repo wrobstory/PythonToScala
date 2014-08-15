@@ -173,6 +173,13 @@ for (f <- foo; b <- bar) foobars += (b -> f)
 foobars
 
 foobars: scala.collection.mutable.Map[String,Int] = Map(b -> 3, a -> 3, c -> 3)
+
+// It's worth noting that Scala also has a zip method
+val arr1 = Array(1, 2, 3)
+val arr2 = Array(4, 5, 6)
+arr1.zip(arr2)
+
+res240: Array[(Int, Int)] = Array((1,4), (2,5), (3,6))
 ```
 
 Scala will allow "guard" expressions, which is the same as a control flow expression in Python: 
