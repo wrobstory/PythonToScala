@@ -26,6 +26,15 @@ Scala:
 scala> val foo = (1, 2.5, "three")
 foo: (Int, Double, String) = (1,2.5,three)
 
+// Accessors are named by position
+scala> foo._1
+res17: Int = 1
+
+scala> foo._2
+res18: Double = 2.5
+
+// Destructuring
+
 scala> val (a, b, c) = foo
 a: Int = 1
 b: Double = 2.5

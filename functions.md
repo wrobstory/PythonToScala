@@ -136,3 +136,79 @@ Scala:
 def proc_func(x:String, y:String) {print(x + y)}
 proc_func("x", "y")
 ```
+
+Scala supports anonymous functions the same way that Python's `lamda` functions work: 
+
+Python:
+```python
+>>> concat_fruit = lambda x, y: x + y
+>>> concat_fruit('apple', 'orange')
+'appleorange'
+```
+
+Scala:
+```scala
+scala> val concat_fruit = (x: String, y: String) => x + y
+concat_fruit: (String, String) => String = <function2>
+
+scala> concat_fruit("apple", "orange")
+res4: String = appleorange
+```
+
+Functions are first-class citizens in Scala, as with Python, so you can pass a function to another higher-order function: 
+
+Python:
+```python
+def apply_to_args(func, arg1, arg2):
+    return func(arg1, arg2)
+>>> apply_to_args(concat_fruit, 'apple', 'orange')
+'appleorange'
+```
+
+Scala: 
+```scala
+scala> def applyToArgs(func: (String, String) => String, arg1: String, arg2: String): String = func(arg1, arg2)
+applyToArgs: (func: (String, String) => String, arg1: String, arg2: String)String
+
+scala> applyToArgs(concat_fruit, "apple", "banana")
+res9: String = applebanana
+
+// You can apply anonymous functions as well
+scala> def applySingleArgFunc(func: (Int) => Int, arg1: Int): Int = func(arg1)
+applySingleArgFunc: (func: Int => Int, arg1: Int)Int
+
+scala> applySingleArgFunc((x: Int) => x + 5, 1)
+res11: Int = 6
+```
+
+Scala makes currying easy. This is a pattern you don't see used a whole lot in Python, but it is easy to implement: 
+
+Python:
+```python
+def concat_curry(fruit):
+  def perf_concat(veg): 
+      return fruit + veg
+  return perf_concat
+
+>>> curried = concat_curry('apple')
+>>> curried('spinach')
+'applespinach'
+>>> curried('carrot')
+'applecarrot'
+```
+
+Scala: 
+```scala
+scala> def concat_curried(fruit: String)(veg: String): String = fruit + veg
+concat_curried: (fruit: String)(veg: String)String
+
+scala> val curried = concat_curried("apple") _
+curried: String => String = <function1>
+
+scala> curried("spinach")
+res14: String = applespinach
+
+scala> curried("carrot")
+res15: String = applecarrot
+```
+
