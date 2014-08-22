@@ -165,12 +165,18 @@ val bar = Array("a", "b", "c")
 
 import scala.collection.mutable.Map
 // Let's go ahead and specify the types, since we know them
-var foobars:Map[String, Int] = Map()
+var foobars= Map[String, Int]()
 
 for (f <- foo; b <- bar) foobars += (b -> f)
-foobars
+scala> foobars
+res5: scala.collection.mutable.Map[String,Int] = Map(b -> 3, a -> 3, c -> 3)
 
-foobars: scala.collection.mutable.Map[String,Int] = Map(b -> 3, a -> 3, c -> 3)
+// This is really powerful- we're not limited to two iterables
+val baz = Array("apple", "orange", "banana")
+val mapped = Map[String, (Int, String)]()
+for (f <- foo; b <- bar; z <- baz) mapped += (z -> (f, b))
+scala> mapped
+res7: scala.collection.mutable.Map[String,(Int, String)] = Map(banana -> (3,c), orange -> (3,c), apple -> (3,c))
 
 // It's worth noting that Scala also has an explicit zip method
 val arr1 = Array(1, 2, 3)
@@ -207,7 +213,7 @@ Above we saw a Python list comprehension- Scala supports the same with the yield
 [1, 2, 3, 4, 5]
 ```
 
-Scala
+##### Scala
 ```scala
 scala> for (f <- foo) yield f
 res142: Array[Int] = Array(1, 2, 3, 4, 5)

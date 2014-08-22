@@ -1,6 +1,6 @@
 Maps
 
-Scala has both immutable and mutable map types, whereas Python has the single reliable (and fast!) Dict. Here's a comparison of methods that effectively do the same thing for the two: 
+Scala has both immutable and mutable map types, whereas Python has the single reliable (and fast!) Dict. Here's a comparison of methods that effectively do the same thing for the two:
 
 Python:
 ```python
@@ -26,7 +26,7 @@ True
 [8, 2, 4, 5, 6]
 ```
 
-Scala: 
+Scala:
 ```scala
 scala> val imm_fruit_count = Map("apples" -> 4, "oranges" -> 5, "bananas" -> 6)
 imm_fruit_count: scala.collection.mutable.Map[String,Int] = Map(bananas -> 6, oranges -> 5, apples -> 4)
@@ -81,7 +81,7 @@ scala> foo
 res237: scala.collection.mutable.ArrayBuffer[String] = ArrayBuffer(bananas6, oranges5)
 ```
 
-A quick note: Scala has a SortedMap class that implements a tree map. The Python equivalent would be the OrderedDict in the collections module: 
+A quick note: Scala has a SortedMap class that implements a tree map. The Python equivalent would be the OrderedDict in the collections module:
 
 Python:
 ```python
@@ -91,7 +91,7 @@ foo = collections.OrderedDict(sorted({"apples": 4, "oranges": 5}.items()))
 OrderedDict([('apples', 4), ('oranges', 5)])
 ```
 
-Scala: 
+Scala:
 ```scala
 // PSA this is immutable
 scala> val scores = scala.collection.immutable.SortedMap("oranges" -> 5, "apples" -> 4)

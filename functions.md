@@ -1,8 +1,9 @@
 Functions
+---------
 
 Scala functions will actually look relatively familiar to Python programmers, except that you need to specify the type of the arguments you're passing to the func:
 
-Python:
+##### Python
 ```python
 def concat_num_str(x, y):
     if not isinstance(x, str):
