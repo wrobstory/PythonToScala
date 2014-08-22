@@ -7,5 +7,9 @@ This guide largely follows the text of [Scala for the Impatient](http://www.hors
 
 Note that in general, translating idioms from one language to another is a bad idea. You should write idiomatic Scala, which appears to be largely defined by the team at Twitter's [Effective Scala](http://twitter.github.io/effectivescala/)
 
+I recommend reading through the guide in the following order:
+1. Expressions and Arithmetic
+2. Conditionals
+
 
 
