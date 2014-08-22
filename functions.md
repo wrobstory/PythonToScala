@@ -1,6 +1,6 @@
 Functions
 
-Scala functions will actually look relatively familiar to Python programmers, except that you need to specify the type of the arguments you're passing to the func: 
+Scala functions will actually look relatively familiar to Python programmers, except that you need to specify the type of the arguments you're passing to the func:
 
 Python:
 ```python
@@ -12,9 +12,9 @@ def concat_num_str(x, y):
 '1string'
 ```
 
-Note that Scala does not require a return statement:
+Note that Scala will just return the result of the body of the function unless you explicitly call a return:
 
-Scala: 
+Scala:
 ```scala
 def concat_num_str(x:Int, y:String) = x.toString + y
 scala> concat_num_str(1, "string")
@@ -47,15 +47,15 @@ scala> len_to_map(str_arr)
 res149: scala.collection.mutable.Map[String,Int] = Map(orange -> 6, apple -> 5, grape -> 5)
 ```
 
-With Scala, you can specify a return type, and *have* to do so in recursive funcs: 
-Scala: 
+With Scala, you can specify a return type, and *have* to do so in recursive funcs:
+Scala:
 ```scala
 def factorial(n: Int): Int = if (n <= 0) 1 else n * factorial(n - 1)
 scala> factorial(5)
 res152: Int = 120
 ```
 
-Default and named arguments should be very familiar for Python users: 
+Default and named arguments should be very familiar for Python users:
 Python
 ```python
 def make_arr(x, y, fruit="apple", drink="water"):
@@ -87,7 +87,7 @@ Unspecified value parameter y.
               make_arr("orange", drink="coffee", "banana")
 ```
 
-Scala supports variable arguments in a similar way to Python's *args, but with a little less flexibility- Scala just knows that its being given a sequence of arguments that it can operate on. 
+Scala supports variable arguments in a similar way to Python's *args, but with a little less flexibility- Scala just knows that its being given a sequence of arguments that it can operate on.
 
 Python:
 ```python
@@ -105,7 +105,7 @@ scala> sum_args(1, 2, 3, 4, 5)
 res159: Int = 15
 ```
 
-As with Python, you can't just pass in a sequence- it needs to be deconstructed first: 
+As with Python, you can't just pass in a sequence- it needs to be deconstructed first:
 Python:
 ```
 >>> sum_args([1, 2, 3])
@@ -118,7 +118,7 @@ TypeError: unsupported operand type(s) for +: 'int' and 'list'
 6
 ```
 
-Scala: 
+Scala:
 ```scala
 scala> sum_args(Array(1, 2, 3))
 <console>:17: error: type mismatch;
@@ -137,7 +137,7 @@ def proc_func(x:String, y:String) {print(x + y)}
 proc_func("x", "y")
 ```
 
-Scala supports anonymous functions the same way that Python's `lamda` functions work: 
+Scala supports anonymous functions the same way that Python's `lamda` functions work:
 
 Python:
 ```python
@@ -155,7 +155,7 @@ scala> concat_fruit("apple", "orange")
 res4: String = appleorange
 ```
 
-Functions are first-class citizens in Scala, as with Python, so you can pass a function to another higher-order function: 
+Functions are first-class citizens in Scala, as with Python, so you can pass a function to another higher-order function:
 
 Python:
 ```python
@@ -165,7 +165,7 @@ def apply_to_args(func, arg1, arg2):
 'appleorange'
 ```
 
-Scala: 
+Scala:
 ```scala
 scala> def applyToArgs(func: (String, String) => String, arg1: String, arg2: String): String = func(arg1, arg2)
 applyToArgs: (func: (String, String) => String, arg1: String, arg2: String)String
@@ -181,12 +181,12 @@ scala> applySingleArgFunc((x: Int) => x + 5, 1)
 res11: Int = 6
 ```
 
-Scala makes currying easy. This is a pattern you don't see used a whole lot in Python, but it is easy to implement: 
+Scala makes currying easy. This is a pattern you don't see used a whole lot in Python, but it is easy to implement:
 
 Python:
 ```python
 def concat_curry(fruit):
-  def perf_concat(veg): 
+  def perf_concat(veg):
       return fruit + veg
   return perf_concat
 
@@ -197,7 +197,7 @@ def concat_curry(fruit):
 'applecarrot'
 ```
 
-Scala: 
+Scala:
 ```scala
 scala> def concat_curried(fruit: String)(veg: String): String = fruit + veg
 concat_curried: (fruit: String)(veg: String)String

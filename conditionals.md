@@ -1,8 +1,8 @@
 Conditional expressions
 
-Scala's if/else/else if will look very familiar to those who have written in C-style languages before. 
+Scala's if/else/else if will look very familiar to those who have written in C-style languages before.
 
-Python
+##### Python:
 ```python
 >>> x = 0
 # Inline: expression_if_true if condition else expression_if_false
@@ -25,7 +25,7 @@ else:
 Foo is string
 ```
 
-Scala
+##### Scala:
 ```scala
 scala> val x = 0
 x: Int = 0
@@ -70,9 +70,9 @@ if (foo.isInstanceOf[String]) {
 Foo is a string!
 ```
 
-While loops should look familiar as well: 
+While loops should look familiar as well:
 
-Python:
+##### Python:
 ```python
 n = 0
 nlist = []
@@ -83,21 +83,18 @@ while n < 5:
 [0, 1, 2, 3, 4]
 ```
 
-The following can actually be handled much better with a comprehension and a more functional approach, coming soon. 
-Scala:
+The following can actually be handled much better with a comprehension and a more functional approach, coming soon.
+
+##### Scala:
 ```scala
 n: Int = 0
 
-// ArrayBuffer is a mutable array that acts most like Python lists. 
+// ArrayBuffer is a mutable array that acts like Python lists.
 scala> import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.ArrayBuffer
 
-scala> var nlist = ArrayBuffer()
-nlist: scala.collection.mutable.ArrayBuffer[Nothing] = ArrayBuffer()
-
 scala> var nlist = ArrayBuffer[Int]()
 nlist: scala.collection.mutable.ArrayBuffer[Int] = ArrayBuffer()
-
 
 scala> :paste
 // Entering paste mode (ctrl-D to finish)
@@ -117,7 +114,7 @@ res115: scala.collection.mutable.ArrayBuffer[Int] = ArrayBuffer(0, 1, 2, 3, 4)
 
 For loops and comprehensions. This is one thing that Scala brings to the Java world that is likely sorely missed by Python programmers writing in Java. Scala supports a `for (variable <- expression)` syntax. Let's look at Python first:
 
-Python: 
+##### Python:
 ```python
 foo = "Apple"
 n = 0
@@ -127,7 +124,7 @@ for a in foo:
 5
 ```
 
-Scala:
+##### Scala:
 ```scala
 // Going to stop using the :paste mode, you get the gist
 val foo = "Apple"
@@ -148,9 +145,9 @@ n
 n: Int = 5
 ```
 
-Python has a very useful function called `zip` that will allow you to iterate over iterables at the same time. Scala will allow you to have multiple "generators" in an expression, which can replicate the zip behavior: 
+Python has a very useful function called `zip` that will allow you to iterate over iterables at the same time. Scala will allow you to have multiple "generators" in an expression, which can replicate the zip behavior:
 
-Python
+##### Python:
 ```python
 foo, bar = [1, 2, 3], ['a', 'b', 'c']
 foobars = {}
@@ -160,7 +157,7 @@ for f, b in zip(foo, bar):
 {'a': 1, 'c': 3, 'b': 2}
 ```
 
-Scala: 
+##### Scala:
 ```scala
 val foo = Array(1, 2, 3)
 val bar = Array("a", "b", "c")
@@ -174,7 +171,7 @@ foobars
 
 foobars: scala.collection.mutable.Map[String,Int] = Map(b -> 3, a -> 3, c -> 3)
 
-// It's worth noting that Scala also has a zip method
+// It's worth noting that Scala also has an explicit zip method
 val arr1 = Array(1, 2, 3)
 val arr2 = Array(4, 5, 6)
 arr1.zip(arr2)
@@ -182,7 +179,8 @@ arr1.zip(arr2)
 res240: Array[(Int, Int)] = Array((1,4), (2,5), (3,6))
 ```
 
-Scala will allow "guard" expressions, which is the same as a control flow expression in Python: 
+Scala will allow "guard" expressions, which is the same as a control flow expression in Python.
+
 Python:
 ```python
 foo = [1,2,3,4,5]
@@ -191,7 +189,7 @@ bar = [x for x in foo if x != 3]
 [1, 2, 4, 5]
 ```
 
-Scala:
+##### Scala:
 ```
 val foo = Array(1, 2, 3, 4, 5)
 var bar = ArrayBuffer[Int]()
@@ -200,8 +198,9 @@ scala> bar
 res136: scala.collection.mutable.ArrayBuffer[Int] = ArrayBuffer(1, 2)
 ```
 
-Above we saw a Python list comprehension- Scala supports the same with the yield syntax: 
-Python:
+Above we saw a Python list comprehension- Scala supports the same with the yield syntax:
+
+##### Python:
 ```python
 >>> [f for f in foo]
 [1, 2, 3, 4, 5]
