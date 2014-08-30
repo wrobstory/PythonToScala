@@ -1,6 +1,6 @@
 Arrays
 
-As we've seen earlier, Scala's Array operates a bit differently than the Python List, and as such we need the ArrayBuffer class for arrays that are not fixed length. 
+As we've seen earlier, Scala's Array operates a bit differently than the Python List, and as such we need the ArrayBuffer class for arrays that are not fixed length.
 
 Python:
 ```python
@@ -8,14 +8,14 @@ int_list = [1, 2, 3]
 str_list = ["a", "b", "c"]
 ```
 
-Scala: 
+Scala:
 ```scala
 val int_arr = Array(1, 2, 3)
 val str_arr = Array("a", "b", "c")
 ```
 
-Because Array is fixed length, the concept of initializing it to values exists: 
-Python: 
+Because Array is fixed length, the concept of initializing it to values exists:
+Python:
 ```python
 # These are contrived- you will rarely see the need for this in Python outside of NumPy
 ten_zeroes = [0]*10
@@ -31,7 +31,7 @@ init_int: Array[Int] = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 init_str: Array[String] = Array(null, null, null, null, null, null, null, null, null, null)
 ```
 
-ArrayBuffers work more like Python lists: 
+ArrayBuffers work more like Python lists:
 Python:
 ```python
 int_list = []
@@ -65,7 +65,7 @@ int_list.extend((5, 6, 7))
 ```
 
 
-Scala: 
+Scala:
 ```scala
 import scala.collection.mutable.ArrayBuffer
 
@@ -119,7 +119,7 @@ scala> int_arr.reverse.sorted
 res215: scala.collection.mutable.ArrayBuffer[Int] = ArrayBuffer(1, 2)
 ```
 
-Though we already covered for-statements and sequence traversal, its worth noting Scala's `until` operator that works a lot like Python's range: 
+Though we already covered for-statements and sequence traversal, its worth noting Scala's `until` operator that works a lot like Python's range:
 
 Python:
 ```python
@@ -131,16 +131,23 @@ foo = [f for f in range(0, 10, 2)]
 [0, 2, 4, 6, 8]
 ```
 
-Scala: 
+Scala:
 ```scala
 scala> val foo = for (x <- 0 until 10) yield x
 foo: scala.collection.immutable.IndexedSeq[Int] = Vector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 
 scala> val foo = for (x <- 0 until (10, 2)) yield x
 foo: scala.collection.immutable.IndexedSeq[Int] = Vector(0, 2, 4, 6, 8)
+
+// Scala also has a "to" operator that creates an inclusive range
+scala> 0 to (10, 2)
+res22: scala.collection.immutable.Range.Inclusive = Range(0, 2, 4, 6, 8, 10)
+
+scala> 0 until (10, 2)
+res23: scala.collection.immutable.Range = Range(0, 2, 4, 6, 8)
 ```
 
-It's worth noting the comprehension syntax again, including the "guard" clause: 
+It's worth noting the comprehension syntax again, including the "guard" clause:
 
 Python:
 ```python
@@ -149,7 +156,7 @@ foo = [x + "qux" for x in ["foo", "bar", "baz"] if x != "foo"]
 ['barqux', 'bazqux']
 ```
 
-Scala: 
+Scala:
 ```scala
 scala> val foo = for (x <- ArrayBuffer("foo", "bar", "baz") if x != "foo") yield x + "qux"
 foo: Array[String] = Array(barqux, bazqux)
@@ -159,9 +166,9 @@ scala> val foo = for (x <- ArrayBuffer("foo", "bar", "baz") if x != "foo") yield
 foo: scala.collection.mutable.ArrayBuffer[String] = ArrayBuffer(barqux, bazqux)
 ```
 
-A quick note that Scala supports multi-dimensional arrays out of the box, whereas in Python, you are really best off using the NumPy library. 
+A quick note that Scala supports multi-dimensional arrays out of the box, whereas in Python, you are really best off using the NumPy library.
 
-Scala: 
+Scala:
 ```scala
 scala> val multdim = Array.ofDim[Int](3, 4)
 multdim: Array[Array[Int]] = Array(Array(0, 0, 0, 0), Array(0, 0, 0, 0), Array(0, 0, 0, 0))

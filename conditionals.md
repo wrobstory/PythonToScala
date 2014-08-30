@@ -84,7 +84,7 @@ while n < 5:
 [0, 1, 2, 3, 4]
 ```
 
-The following can actually be handled much better with a comprehension and a more functional approach, coming soon:
+The following can actually be handled much better with a comprehension and a more functional approach, discussed below:
 
 ##### Scala
 ```scala
@@ -141,9 +141,22 @@ n: Int = 5
 // This would actually be better expressed in a single line
 n = 0
 for (x <- foo) n += 1
-n
+scala> n
+res141: n: Int = 5
+```
 
-n: Int = 5
+Python comprehensions are a very important part of writing idiomatic Python; Scala supports the same with the yield syntax:
+
+##### Python
+```python
+>>> [f for f in foo]
+[1, 2, 3, 4, 5]
+```
+
+##### Scala
+```scala
+scala> for (f <- foo) yield f
+res142: Array[Int] = Array(1, 2, 3, 4, 5)
 ```
 
 Python has a very useful function called `zip` that will allow you to iterate over iterables at the same time. Scala will allow you to have multiple "generators" in an expression, which can replicate the zip behavior:
@@ -155,6 +168,10 @@ foobars = {}
 for f, b in zip(foo, bar):
     foobars[b] = f
 >>> foobars
+{'a': 1, 'c': 3, 'b': 2}
+
+# It's more Pythonic to use a comprehension
+>>> {b: f for f, b in zip(foo, bar)}
 {'a': 1, 'c': 3, 'b': 2}
 ```
 
@@ -186,6 +203,24 @@ arr1.zip(arr2)
 res240: Array[(Int, Int)] = Array((1,4), (2,5), (3,6))
 ```
 
+Python's enumerate is a really nice language feature, and is mirrored by Scala's `zipWithIndex`:
+
+##### Python
+```python
+>>> [(x, y) for x, y in enumerate(["foo", "bar", "baz"])]
+[(0, 'foo'), (1, 'bar'), (2, 'baz')]
+```
+
+##### Scala
+```scala
+scala> for ((y, x) <- Array("foo", "bar", "baz").zipWithIndex) yield (x, y)
+res27: Array[(Int, String)] = Array((0,foo), (1,bar), (2,baz))
+
+// Note that simply calling zipWithIndex will return something similar (but with values // in reverse order)
+scala> Array("foo", "bar", "baz").zipWithIndex
+res31: Array[(String, Int)] = Array((foo,0), (bar,1), (baz,2))
+```
+
 Scala will allow "guard" expressions, which is the same as a control flow expression in Python:
 
 ##### Python
@@ -203,21 +238,19 @@ var bar = ArrayBuffer[Int]()
 for (f <- foo if f != 3) bar += f
 scala> bar
 res136: scala.collection.mutable.ArrayBuffer[Int] = ArrayBuffer(1, 2)
+
+// You can stack guards
+scala> for (x <- (1 to 5).toArray if x != 2 if x != 3) yield x
+res44: Array[Int] = Array(1, 4, 5)
 ```
 
-Above we saw a Python list comprehension- Scala supports the same with the yield syntax:
-
-##### Python
-```python
->>> [f for f in foo]
-[1, 2, 3, 4, 5]
-```
+Note that in many cases, it may be more concise to use `map` vs a for comprehension:
 
 ##### Scala
 ```scala
-scala> for (f <- foo) yield f
-res142: Array[Int] = Array(1, 2, 3, 4, 5)
+scala> for (c <- Array(1, 2, 3)) yield c + 2
+res56: Array[Int] = Array(3, 4, 5)
+
+scala> Array(1, 2, 3).map(_ + 2)
+res57: Array[Int] = Array(3, 4, 5)
 ```
-
-
-

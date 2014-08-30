@@ -1,8 +1,8 @@
-#Python to Scala: 
+#Python to Scala:
 
 ##Variables
 
-Python: 
+Python:
 ```python
 >>> foo = "Apples"
 >>> baz = foo + " and Oranges."
@@ -37,24 +37,32 @@ baz: String = Apples and Oranges.
 
 scala> baz = "Only Grapes."
 baz: String = Only Grapes.
+
+scala> var one = 1
+one: Int = 1
+
+scala> one += 1
+
+scala> one
+res21: Int = 2
 ```
 
-Scala will also let you specify the type for the compiler: 
+Scala will also let you specify the type for the compiler:
 
 ```scala
 scala> val foo: String = "Apples"
 foo: String = Apples
 ```
 
-Python and Scala will both let you perform multiple assignment. However, be careful with Python and pass by reference! You'll usually want to unpack rather than perform multiple assignment. 
+Python and Scala will both let you perform multiple assignment. However, be careful with Python and pass by reference! You'll usually want to unpack rather than perform multiple assignment.
 
-Scala: 
+Scala:
 ```scala
 scala> val foo, bar = Array(1, 2, 3)
 foo: Array[Int] = Array(1, 2, 3)
 bar: Array[Int] = Array(1, 2, 3)
 
-// foo and bar reference different pieces of memory; changing one will not change the other. 
+// foo and bar reference different pieces of memory; changing one will not change the other.
 scala> bar(0) = 4
 
 scala> bar
@@ -64,7 +72,7 @@ scala> foo
 res71: Array[Int] = Array(1, 2, 3)
 ```
 
-The same can be achieved with Python unpacking: 
+The same can be achieved with Python unpacking:
 ```python
 >>> foo, bar = [1, 2, 3], [1, 2, 3]
 # Are they referencing the same memory?
