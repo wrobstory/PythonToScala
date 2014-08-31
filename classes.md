@@ -6,53 +6,256 @@ In the meantime, I'm going to show some simple classes that are comparable betwe
 
 ##### Python
 ```python
-class Closet:
+class Automobile(object):
 
-    def __init__(self, skis, boots, bags):
-        self.skis = skis
-        self.boots = boots
-        self.bags = bags
+    def __init__(self, wheels=4, engine=1, lights=2):
+        self.wheels = wheels
+        self.engine = engine
+        self.lights = lights
 
-    def total_item_count(self):
-        return self.skis + self.boots + self.bags
+    def total_parts(self):
+        return self.wheels + self.engine + self.lights
+
+    def remove_wheels(self, count):
+        if (self.wheels - count) < 0:
+            raise ValueError('Automobile cannot have fewer than 0 wheels!')
+        else:
+            self.wheels = self.wheels - count
+            print('The automobile now has {} wheels!').format(self.wheels)
 
 
->>> mycloset = Closet(3, 4, 5)
->>> mycloset.skis
+>>> car = Automobile()
+>>> car.wheels
 3
->>> mycloset.total_item_count()
-12
->>> mycloset.skis = 10
->>> mycloset.total_item_count()
-19
+>>> car.total_parts()
+7
+>>> car.wheels = 6
+>>> car.total_parts()
+9
+>>> car.remove_wheels(7)
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-30-24207883207a> in <module>()
+----> 1 car.remove_wheels(7)
+
+<ipython-input-27-41c5871dc8ce> in remove_wheels(self, count)
+     11     def remove_wheels(self, count):
+     12         if (self.wheels - count) < 0:
+---> 13             raise ValueError('Automobile cannot have fewer than 0 wheels!')
+     14         else:
+     15             self.wheels = self.wheels - count
+
+ValueError: Automobile cannot have fewer than 0 wheels!
+
+>>> car.remove_wheels(2)
+The automobile now has 4 wheels!
 ```
 
 In Scala, use var to make all attributes mutable. Behind the scenes, Scala is creating getters and setters for each:
 
 ##### Scala
 ```scala
-class Closet(var skis:Int, var boots:Int, var bags:Int){
+class Automobile(var wheels:Int = 4, var engine:Int = 1, var lights:Int = 2 ){
 
-    def total_item_count() = {
+    def total_parts() = {
         // No "self" needed, and implicit return
-        skis + boots + bags
+        wheels + engine + lights
+    }
+
+    // Purely side-effecting function, no "=" needed
+    def remove_wheels(count:Int) {
+        if (wheels - count < 0) {
+            throw new IllegalArgumentException("Automobile cannot have fewer than 0 wheels!")
+        } else {
+            wheels = wheels - count
+            println(s"Auto now has $wheels wheels!")
+        }
     }
 }
 
-scala> val mycloset = new Closet(3, 4, 5)
-mycloset: Closet = Closet@501959ff
+scala> val car = new Automobile()
+car: Automobile = Automobile@77424e9
 
-scala> mycloset.skis
-res61: Int = 3
+scala> car.wheels
+res64: Int = 4
 
-scala> mycloset.total_item_count()
-res62: Int = 12
+scala> car.total_parts()
+res65: Int = 7
 
-scala> mycloset.skis = 10
-mycloset.skis: Int = 10
+scala> car.wheels = 6
+car.wheels: Int = 6
 
-scala> mycloset.total_item_count()
-res63: Int = 19
+scala> car.total_parts()
+res66: Int = 9
+
+scala> car.remove_wheels(7)
+java.lang.IllegalArgumentException: Automobile cannot have fewer than 0 wheels!
+  at Automobile.remove_wheels(<console>:19)
+  ... 32 elided
+
+scala> car.remove_wheels(2)
+Auto now has 4 wheels!
+```
+
+In Scala, if you define a constructor field as val (immutable), you get a getter but not a setter. This is roughly comparable to defining your own property getter/setters on a Python class (for a great rundown of Python properties and descriptors, check out Chris Beaumont's [Python Descriptors Demystified](http://nbviewer.ipython.org/gist/ChrisBeaumont/5758381/descriptor_writeup.ipynb)):
+
+##### Python
+```python
+class Automobile(object):
+
+    def __init__(self, wheels=4):
+        # The underscore is convention, but not enforced
+        self._wheels = wheels
+
+    @property
+    def wheels(self):
+        return self._wheels
+
+    @wheels.setter
+    def wheels(self, count):
+        raise ValueError('This value is immutable!')
+
+>>> car = Automobile()
+>>> car.wheels
+4
+>>> car.wheels = 5
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-26-f07fada773fb> in <module>()
+----> 1 car.wheels = 5
+
+<ipython-input-23-87368b68789b> in wheels(self, count)
+     11     @wheels.setter
+     12     def wheels(self, count):
+---> 13         raise ValueError('This value is immutable!')
+
+ValueError: This value is immutable!
+```
+
+##### Scala
+```scala
+class Automobile(val wheels:Int = 4){}
+
+scala> val car = new Automobile()
+car: Automobile = Automobile@64284ba3
+
+scala> car.wheels
+res67: Int = 4
+
+scala> car.wheels = 5
+<console>:12: error: reassignment to val
+       car.wheels = 5
+                  ^
+```
+
+Like Java, Scala also allows you to define fields as `private`, which prevents getters/setters from being generated and only allows the field to be accessed within the class. This behavior can be replicated in Python, but you won't often see this pattern actually being used in Python programs- it is understood that class attributes leading with an underscore are "private" and should not be used:
+
+##### Python
+```python
+class Automobile(object):
+
+    def __init__(self, wheels=4):
+        # The underscore is convention, but not enforced
+        self._wheels = wheels
+
+    @property
+    def wheels(self):
+        raise ValueError('You cannot access this value!')
+
+    @wheels.setter
+    def wheels(self, count):
+        raise ValueError('You cannot access this value!')
+
+>>> car.wheels
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-41-d267b674bbda> in <module>()
+----> 1 car.wheels
+
+<ipython-input-39-73ff0f17068d> in wheels(self)
+      7     @property
+      8     def wheels(self):
+----> 9         raise ValueError('You cannot access this value!')
+     10
+     11     @wheels.setter
+
+ValueError: You cannot access this value!
+
+>>> car.wheels = 5
+---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+<ipython-input-42-f07fada773fb> in <module>()
+----> 1 car.wheels = 5
+
+<ipython-input-39-73ff0f17068d> in wheels(self, count)
+     11     @wheels.setter
+     12     def wheels(self, count):
+---> 13         raise ValueError('You cannot access this value!')
+
+ValueError: You cannot access this value!
+```
+
+##### Scala
+```scala
+class Automobile(private val wheels:Int = 4){}
+
+scala> car.wheels
+<console>:11: error: value wheels in class Automobile cannot be accessed in Automobile
+              car.wheels
+                  ^
+
+scala> car.wheels = 5
+<console>:13: error: value wheels in class Automobile cannot be accessed in Automobile
+val $ires4 = car.wheels
+```
+
+Staticmethods in Scala are handled via "companion objects" for classes, which are named the same as the class itself. Objects are an entire topic of study for the Scala language- I am just touching on them as they related to Python's `staticmethod`, but I recommend that you do some reading on how objects are used in Scala. Also demonstrated in this example is how object fields can be used to mirror Python's class-level attributes:
+
+##### Python
+```python
+class Automobile(object):
+
+    wheels = 4
+    lights = 2
+
+    def __init__(self, name):
+        self.name = name
+
+    @staticmethod
+    def print_uninst_str():
+        print("No 'self' passed to this method, and no instantiation."
+              " It's static!")
+
+>>> Automobile.print_uninst_str()
+No 'self' passed to this method, and no instantiation. It's static!
+>>> Automobile.wheels
+4
+>>> Automobile.wheels = 5
+>>> Automobile.wheels
+5
+```
+
+##### Scala
+```scala
+class Automobile(var name:String){}
+
+object Automobile {
+    var wheels = 4
+    var lights = 2
+    def print_uninst_str() = "No 'self' passed to this method, and no instantiation. It's static!"
+}
+
+scala> Automobile.print_uninst_str
+res3: String = No 'self' passed to this method, and no instantiation. It's static!
+
+scala> Automobile.wheels
+res4: Int = 4
+
+scala> Automobile.wheels = 5
+Automobile.wheels: Int = 5
+
+scala> Automobile.wheels
+res5: Int = 5
 ```
 
 
