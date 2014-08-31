@@ -149,14 +149,14 @@ Python comprehensions are a very important part of writing idiomatic Python; Sca
 
 ##### Python
 ```python
->>> [f for f in foo]
-[1, 2, 3, 4, 5]
+>>> [f + 1 for f in [1, 2, 3, 4, 5]]
+[2, 3, 4, 5, 6]
 ```
 
 ##### Scala
 ```scala
-scala> for (f <- foo) yield f
-res142: Array[Int] = Array(1, 2, 3, 4, 5)
+scala> for (f <- Array(1, 2, 3, 4, 5)) yield f + 1
+res59: Array[Int] = Array(2, 3, 4, 5, 6)
 ```
 
 Python has a very useful function called `zip` that will allow you to iterate over iterables at the same time. Scala will allow you to have multiple "generators" in an expression, which can replicate the zip behavior:
@@ -232,7 +232,7 @@ bar = [x for x in foo if x != 3]
 ```
 
 ##### Scala
-```
+```scala
 val foo = Array(1, 2, 3, 4, 5)
 var bar = ArrayBuffer[Int]()
 for (f <- foo if f != 3) bar += f

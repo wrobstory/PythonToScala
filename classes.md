@@ -1,33 +1,59 @@
 Classes
 
-Building classes with Scala is simpler than Java (woo!), but still with some added intricacies that you won't usually see when building Python classes. It's probably best just to compare a class that behaves the same for the two languages. If you have't used Python properties or descriptors before, I *highly* recommend you read Chris Beaumont's excellent rundown: http://nbviewer.ipython.org/gist/ChrisBeaumont/5758381/descriptor_writeup.ipynb
+Building classes with Scala is simpler than Java (woo!), but still with some added intricacies that you won't normally see when building Python classes. I highly recommend reading a bit on how Scala classes work, as there are a number of Java-like details that are worth knowing.
 
-Python:
+In the meantime, I'm going to show some simple classes that are comparable between the two, and leave it to the reader to investigate further:
+
+##### Python
 ```python
+class Closet:
 
-class Plane(object):
+    def __init__(self, skis, boots, bags):
+        self.skis = skis
+        self.boots = boots
+        self.bags = bags
 
-    _crew = 0
-    passengers = 0
+    def total_item_count(self):
+        return self.skis + self.boots + self.bags
 
-    @property
-    def crew(self):
-        pass
 
-    @crew.setter
-    def crew(self, crew):
-        if crew < 0:
-            raise ValueError("Crew cannot be less than 0!")
-        else:
-            self._crew = crew
-
-    @crew.getter
-    def crew(self):
-        return self._crew
-
-    def board(self):
-        self.passengers += 1
-
-    def count_passengers(self):
-        return self.passengers
+>>> mycloset = Closet(3, 4, 5)
+>>> mycloset.skis
+3
+>>> mycloset.total_item_count()
+12
+>>> mycloset.skis = 10
+>>> mycloset.total_item_count()
+19
 ```
+
+In Scala, use var to make all attributes mutable. Behind the scenes, Scala is creating getters and setters for each:
+
+##### Scala
+```scala
+class Closet(var skis:Int, var boots:Int, var bags:Int){
+
+    def total_item_count() = {
+        // No "self" needed, and implicit return
+        skis + boots + bags
+    }
+}
+
+scala> val mycloset = new Closet(3, 4, 5)
+mycloset: Closet = Closet@501959ff
+
+scala> mycloset.skis
+res61: Int = 3
+
+scala> mycloset.total_item_count()
+res62: Int = 12
+
+scala> mycloset.skis = 10
+mycloset.skis: Int = 10
+
+scala> mycloset.total_item_count()
+res63: Int = 19
+```
+
+
+
