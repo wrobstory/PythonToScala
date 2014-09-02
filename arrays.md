@@ -1,38 +1,105 @@
-Arrays
+Sequences
+---------
 
-As we've seen earlier, Scala's Array operates a bit differently than the Python List, and as such we need the ArrayBuffer class for arrays that are not fixed length.
+Scala has a very large number of sequence types built-in to choose from. This includes List (linked-lists), Vectors (immutable arrays), Arrays (mutable arrays of fixed length), and ArrayBuffers(mutable arrays of varying length).
 
-Python:
-```python
-int_list = [1, 2, 3]
-str_list = ["a", "b", "c"]
-```
+Naturally, you should choose the data structure that best suits your needs. I am going to briefly cover Vectors, Arrays, and ArrayBuffers here (the latter of which most closely resembles a Python list).
 
-Scala:
+Vector is the best default immutable sequence in Scala. Here is a crash course of the number of things you can do with a Scala Sequence, including some of the fun functional bits:
+
+##### Scala:
 ```scala
-val int_arr = Array(1, 2, 3)
-val str_arr = Array("a", "b", "c")
+scala> val vector = Vector(1, 2, 3)
+vector: scala.collection.immutable.Vector[Int] = Vector(1, 2, 3)
+
+scala> vector.map(_ + 2)
+res30: scala.collection.immutable.Vector[Int] = Vector(3, 4, 5)
+
+scala> vector.count(_ == 2)
+res31: Int = 1
+
+scala> Vector(1, 2, 3, 4, 5).drop(3)
+res33: scala.collection.immutable.Vector[Int] = Vector(4, 5)
+
+scala> vector.exists(_ == 4)
+res35: Boolean = false
+
+scala> vector.take(2)
+res8: scala.collection.immutable.Vector[Int] = Vector(1, 2)
+
+scala> Vector(1, 20, 3, 25).reduce(_ + _)
+res4: Int = 49
+
+scala> Vector(3, 4, 4, 5, 3).distinct
+res5: scala.collection.immutable.Vector[Int] = Vector(3, 4, 5)
+
+scala> Vector(1, 20, 3, 25).partition(_ > 10)
+res2: (scala.collection.immutable.Vector[Int], scala.collection.immutable.Vector[Int]) = (Vector(20, 25),Vector(1, 3))
+
+scala> Vector("foo", "bar", "baz", "foo", "bar").groupBy(_ == "foo")
+res0: scala.collection.immutable.Map[Boolean,scala.collection.immutable.Vector[String]] = Map(false -> Vector(bar, baz, bar), true -> Vector(foo, foo))
+
+scala> Vector(1, 20, 3, 25).groupBy(_ > 10)
+res1: scala.collection.immutable.Map[Boolean,scala.collection.immutable.Vector[Int]] = Map(false -> Vector(1, 3), true -> Vector(20, 25))
+
+scala> vector.filter(_ != 2)
+res9: scala.collection.immutable.Vector[Int] = Vector(1, 3)
+
+scala> vector.max
+res11: Int = 3
+
+scala> Vector(3, 2, 1).sorted
+res17: scala.collection.immutable.Vector[Int] = Vector(1, 2, 3)
+
+scala> Vector("fo", "fooooo", "foo", "fooo").sortWith(_.length > _.length)
+res17: scala.collection.immutable.Vector[String] = Vector(fooooo, fooo, foo, fo)
+
+scala> vector.sum
+res15: Int = 6
+
+scala> Vector(Vector(1, 2, 3), Vector(4, 5, 6)).flatten
+res28: scala.collection.immutable.Vector[Int] = Vector(1, 2, 3, 4, 5, 6)
+
+// Another way to go about the previous operation
+scala> Vector.concat(Vector(1, 2, 3), Vector(4, 5, 6))
+res16: scala.collection.immutable.Vector[Int] = Vector(1, 2, 3, 4, 5, 6)
+
+scala> Vector(1, 2, 3).intersect(Vector(3, 4, 5))
+res7: scala.collection.immutable.Vector[Int] = Vector(3)
+
+scala> Vector(1, 2, 3).diff(Vector(3, 4, 5))
+res8: scala.collection.immutable.Vector[Int] = Vector(1, 2)
 ```
 
-Because Array is fixed length, the concept of initializing it to values exists:
-Python:
+The Array is a fixed length, so the concept of initializing it to values exists:
+##### Python:
 ```python
 # These are contrived- you will rarely see the need for this in Python outside of NumPy
 ten_zeroes = [0]*10
 ten_none = [None]*10
 ```
 
-Scala
+##### Scala
 ```scala
-val init_int = new Array[Int](10)
-val init_str = new Array[String](10)
-
+scala> val init_int = new Array[Int](10)
 init_int: Array[Int] = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+scala> val init_str = new Array[String](10)
 init_str: Array[String] = Array(null, null, null, null, null, null, null, null, null, null)
+
+scala> Array.tabulate(3)(a => a + 5)
+res20: Array[Int] = Array(5, 6, 7)
+
+scala> Array.tabulate(3)(a => a * 5)
+res21: Array[Int] = Array(0, 5, 10)
+
+scala> Array.fill(3)(10)
+res22: Array[Int] = Array(10, 10, 10)
 ```
 
-ArrayBuffers work more like Python lists:
-Python:
+ArrayBuffer is the go-to mutable sequence, and they work more like Python lists:
+
+##### Python:
 ```python
 int_list = []
 int_list.append(1)
@@ -62,6 +129,7 @@ int_list.extend((5, 6, 7))
 2
 >>> min(int_list)
 1
+>>> int_list = []
 ```
 
 
@@ -117,6 +185,11 @@ res211: Int = 1
 
 scala> int_arr.reverse.sorted
 res215: scala.collection.mutable.ArrayBuffer[Int] = ArrayBuffer(1, 2)
+
+scala> int_arr.clear
+
+scala> int_arr
+res29: scala.collection.mutable.ArrayBuffer[Int] = ArrayBuffer()
 ```
 
 Though we already covered for-statements and sequence traversal, its worth noting Scala's `until` operator that works a lot like Python's range:
@@ -147,7 +220,7 @@ scala> 0 until (10, 2)
 res23: scala.collection.immutable.Range = Range(0, 2, 4, 6, 8)
 ```
 
-It's worth noting the comprehension syntax again, including the "guard" clause:
+ A quick review of the comprehension syntax again, including the "guard" clause:
 
 Python:
 ```python
@@ -158,12 +231,17 @@ foo = [x + "qux" for x in ["foo", "bar", "baz"] if x != "foo"]
 
 Scala:
 ```scala
-scala> val foo = for (x <- ArrayBuffer("foo", "bar", "baz") if x != "foo") yield x + "qux"
-foo: Array[String] = Array(barqux, bazqux)
+scala> val foo = for (x <- Vector("foo", "bar", "baz") if x != "foo") yield x + "qux"
+foo: scala.collection.immutable.Vector[String] = Vector(barqux, bazqux)
 
 // Note that the comprehension returns the type that is fed to it
 scala> val foo = for (x <- ArrayBuffer("foo", "bar", "baz") if x != "foo") yield x + "qux"
 foo: scala.collection.mutable.ArrayBuffer[String] = ArrayBuffer(barqux, bazqux)
+
+// Note that we could use a more functional approach to operate over the sequences here as well
+scala> Vector("foo", "bar", "baz").filter(_ != "foo").map(_ + "qux")
+res25: scala.collection.immutable.Vector[String] = Vector(barqux, bazqux)
+
 ```
 
 A quick note that Scala supports multi-dimensional arrays out of the box, whereas in Python, you are really best off using the NumPy library.

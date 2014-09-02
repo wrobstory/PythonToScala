@@ -258,5 +258,183 @@ scala> Automobile.wheels
 res5: Int = 5
 ```
 
+The following section is going to be a *very* light treatment of inheritance in Scala and Python. I recommend reading more on both languages regarding abstract base classes and traits (Scala) and Method Resolution Order (Python). For now, here are the basics.
+
+Scala supports single inheritance via abstract base classes, which are explicitly named as such. Python can treat any class as an abstract one:
+
+##### Python
+```python
+class Automobile(object):
+
+    wheels = 4
+    lights = 2
+    doors = 2
+
+    def __init__(self, color, make):
+        self.color = color
+        self.make = make
+
+    def towing_capacity(self):
+        pass
+
+    def top_speed(self):
+        pass
+
+    def print_make_color(self):
+        print(" ".join([self.color, self.make]))
+
+class Car(Automobile):
+
+    doors = 4
+
+    def __init__(self, color, model):
+        super(Car, self).__init__(color, model)
+
+    def towing_capacity(self):
+        return 0
+
+    def top_speed(self):
+        return 150
 
 
+>>> mycar = Car("red", "Toyota")
+>>> mycar.doors
+4
+>>> mycar.towing_capacity()
+0
+>>> mycar.top_speed()
+150
+>>> mycar.print_make_color()
+Red Toyota
+```
+
+##### Scala
+```scala
+abstract class Automobile(val color:String, val make:String) {
+    val wheels:Int = 4
+    val lights:Int = 2
+    val doors:Int = 4
+
+    def towing_capacity: Int
+    def top_speed: Int
+    def print_make_color():String = return s"$color $make"
+}
+
+class Car(color:String, make:String) extends Automobile(color, make) {
+
+    override val doors = 4 // Override needed if immutable "val"
+
+    def towing_capacity() = 0
+    def top_speed() = 150
+}
+
+scala> val mycar = new Car("Red", "Toyota")
+mycar: Car = Car@351cdd99
+
+scala> mycar.print_make_color()
+res2: String = Red Toyota
+
+scala> mycar.doors
+res3: Int = 4
+
+scala> mycar.top_speed
+res4: Int = 150
+
+// Abstract classes only support single inheritance!
+scala> abstract class SportPackage {}
+defined class SportPackage
+
+scala> class Car(color:String, make:String) extends Automobile(color, make) with SportPackage(){}
+<console>:9: error: class SportPackage needs to be a trait to be mixed in
+       class Car(color:String, make:String) extends Automobile(color, make) with SportPackage(){}
+```
+
+Generally, you should only use abstract base classes in Scala if you need Java interop or need to pass constructor parameters to the base class. Otherwise, you should use what Scala calls "Traits", which act like class mixins and enable multiple inheritance in Scala.
+
+##### Python
+```python
+
+class Engine(object):
+
+    started = False
+
+    def start(self):
+        self.started = True
+
+    def shutdown(self):
+        self.started = False
+
+class Transmission(object):
+
+    fluid_level = 0
+
+    def add_fluid(self, amount):
+        self.fluid_level = self.fluid_level + amount
+
+# Using Automobile class from earlier
+class Car(Automobile, Engine, Transmission):
+
+    doors = 4
+
+    def __init__(self, color, model):
+        super(Car, self).__init__(color, model)
+
+    def towing_capacity(self):
+        return 0
+
+    def top_speed(self):
+        return 150
+
+>>> mycar = Car("Red", "Toyota")
+
+>>> mycar.start()
+
+>>> mycar.started
+True
+
+>>> mycar.fluid_level
+0
+
+>>> mycar.add_fluid(50)
+
+>>> mycar.fluid_level
+50
+```
+
+##### Scala
+
+trait Engine {
+    var started:Boolean = false
+    // These don't return anything, so no "=" needed
+    def start() {started = true}
+    def shutdown() {started = false}
+}
+
+trait Transmission {
+    var fluid_level:Int = 0
+    def add_fluid(amount:Int) {fluid_level = fluid_level + amount}
+}
+
+class Car(color:String, make:String) extends Automobile(color, make)
+  with Engine
+  with Transmission {
+
+    override val doors = 4 // Override needed if immutable "val"
+
+    def towing_capacity() = 0
+    def top_speed() = 150
+}
+
+scala> val mycar = new Car("Red", "Toyota")
+mycar: Car = Car@38134991
+
+scala> mycar.start()
+
+scala> mycar.started
+res2: Boolean = true
+
+scala> mycar.add_fluid(50)
+
+scala> mycar.fluid_level
+res4: Int = 50
+```

@@ -59,6 +59,13 @@ res228: scala.collection.Set[String] = Set(bananas, oranges)
 
 scala> mut_fruit_count.values
 res229: Iterable[Int] = HashMap(6, 5)
+
+// This is a nice feature of Scala Maps:
+scala> val defaultMap = Map("foo" -> 1, "bar" -> 2).withDefaultValue(3)
+defaultMap: scala.collection.immutable.Map[String,Int] = Map(foo -> 1, bar -> 2)
+
+scala> defaultMap("qux")
+res31: Int = 3
 ```
 
 Scala will let you iterate over maps in a similar way as Python:

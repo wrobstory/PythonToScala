@@ -1,6 +1,8 @@
 Functions
 ---------
 
+Note: in the following section I use "function" to refer to both Scala functions (defined with `=>`) and Scala methods (defined with `def`) somewhat interchangeably.
+
 Scala functions will actually look relatively familiar to Python programmers, except that you need to specify the type of the arguments you're passing to the func:
 
 ##### Python
