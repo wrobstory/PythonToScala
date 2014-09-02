@@ -1,8 +1,9 @@
-#Python to Scala:
+Variables
+---------
 
-##Variables
+Scala has both values (immutable) and variables (mutable):
 
-Python:
+##### Python:
 ```python
 >>> foo = "Apples"
 >>> baz = foo + " and Oranges."
@@ -11,8 +12,7 @@ Python:
 >>> baz = "Only Grapes."
 ```
 
-
-Scala:
+##### Scala:
 ```scala
 scala> val foo = "Apples"
 foo: String = Apples
@@ -47,7 +47,9 @@ scala> one
 res21: Int = 2
 ```
 
-Scala will also let you specify the type for the compiler:
+Scala will also allow you to more strongly type your variables, rather than letting the compiler interpret the type:
+
+##### Scala
 
 ```scala
 scala> val foo: String = "Apples"
@@ -56,7 +58,7 @@ foo: String = Apples
 
 Python and Scala will both let you perform multiple assignment. However, be careful with Python and pass by reference! You'll usually want to unpack rather than perform multiple assignment.
 
-Scala:
+##### Scala:
 ```scala
 scala> val foo, bar = Array(1, 2, 3)
 foo: Array[Int] = Array(1, 2, 3)
