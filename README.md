@@ -1,5 +1,6 @@
 PythonToScala
 =============
+![PyToScala](https://farm4.staticflickr.com/3865/14938431420_58b1ffaaa9.jpg)
 
 The goal of this project is to be a concise guide for those transitioning from Python to Scala. This is by *no means* meant to be a complete guide to Scala, but rather some (hopefully) helpful snippets of code to help you translate between the two languages. 
 
