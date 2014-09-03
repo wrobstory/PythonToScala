@@ -1,7 +1,7 @@
 Variables
 ---------
 
-Scala has both values (immutable) and variables (mutable):
+This is going to be a very quick review, as there shouldn't be much surprising with the way Scala handles values (immutable) and variables (mutable):
 
 ##### Python:
 ```python

@@ -1,6 +1,7 @@
 Classes
+-------
 
-Building classes with Scala is simpler than Java (woo!), but still with some added intricacies that you won't normally see when building Python classes. I highly recommend reading a bit on how Scala classes work, as there are a number of Java-like details that are worth knowing.
+Building classes with Scala is simpler than Java (woo!), but still with some added intricacies that you won't normally see when building Python classes. I highly recommend reading a bit on how Scala classes work, as there are a number of Java-related details that are worth knowing.
 
 In the meantime, I'm going to show some simple classes that are comparable between the two, and leave it to the reader to investigate further:
 
@@ -402,7 +403,7 @@ True
 ```
 
 ##### Scala
-
+```scala
 trait Engine {
     var started:Boolean = false
     // These don't return anything, so no "=" needed

@@ -1,7 +1,7 @@
 Strings
 -------
 
-Python and Scala share some syntax regarding String operations, and the rest should look familiar if you've written any JavaScript:
+Python and Scala share some syntax regarding String operations, and what differs is straightforward:
 
 ##### Python
 ```python

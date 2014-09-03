@@ -72,6 +72,7 @@ res8: scala.collection.immutable.Vector[Int] = Vector(1, 2)
 ```
 
 The Array is a fixed length, so the concept of initializing it to values exists:
+
 ##### Python:
 ```python
 # These are contrived- you will rarely see the need for this in Python outside of NumPy
@@ -133,7 +134,7 @@ int_list.extend((5, 6, 7))
 ```
 
 
-Scala:
+##### Scala:
 ```scala
 import scala.collection.mutable.ArrayBuffer
 
@@ -194,7 +195,7 @@ res29: scala.collection.mutable.ArrayBuffer[Int] = ArrayBuffer()
 
 Though we already covered for-statements and sequence traversal, its worth noting Scala's `until` operator that works a lot like Python's range:
 
-Python:
+##### Python:
 ```python
 foo = [f for f in range(0, 10, 1)]
 >>> foo
@@ -204,7 +205,7 @@ foo = [f for f in range(0, 10, 2)]
 [0, 2, 4, 6, 8]
 ```
 
-Scala:
+##### Scala:
 ```scala
 scala> val foo = for (x <- 0 until 10) yield x
 foo: scala.collection.immutable.IndexedSeq[Int] = Vector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
@@ -222,14 +223,14 @@ res23: scala.collection.immutable.Range = Range(0, 2, 4, 6, 8)
 
  A quick review of the comprehension syntax again, including the "guard" clause:
 
-Python:
+##### Python:
 ```python
 foo = [x + "qux" for x in ["foo", "bar", "baz"] if x != "foo"]
 >>> foo
 ['barqux', 'bazqux']
 ```
 
-Scala:
+##### Scala:
 ```scala
 scala> val foo = for (x <- Vector("foo", "bar", "baz") if x != "foo") yield x + "qux"
 foo: scala.collection.immutable.Vector[String] = Vector(barqux, bazqux)
@@ -246,7 +247,7 @@ res25: scala.collection.immutable.Vector[String] = Vector(barqux, bazqux)
 
 A quick note that Scala supports multi-dimensional arrays out of the box, whereas in Python, you are really best off using the NumPy library.
 
-Scala:
+##### Scala:
 ```scala
 scala> val multdim = Array.ofDim[Int](3, 4)
 multdim: Array[Array[Int]] = Array(Array(0, 0, 0, 0), Array(0, 0, 0, 0), Array(0, 0, 0, 0))

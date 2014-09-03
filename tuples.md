@@ -1,8 +1,9 @@
 Tuples
+------
 
-In Scala, tuples can be of mixed types, like Python tuples. Scala also supports destructuring of tuples into vals, as well as zipping into a tuple of tuples:
+In Scala, tuples can be of mixed types, like Python tuples. Tuples are also a good way to destructure vals/vars in Scala, as well as the result of many operations like `zip`:
 
-Python:
+##### Python:
 ```python
 >>> foo = (1, 2.5, "three")
 >>> a, b, c = foo
@@ -21,7 +22,7 @@ Python:
 ((1, 4), (2.5, 5.5), ('three', 'six'))
 ```
 
-Scala:
+##### Scala:
 ```scala
 scala> val foo = (1, 2.5, "three")
 foo: (Int, Double, String) = (1,2.5,three)

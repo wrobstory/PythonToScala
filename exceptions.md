@@ -1,8 +1,9 @@
 Exceptions
+----------
 
 Exceptions are relatively straightforward in Scala, as they are in Python:
 
-Python:
+##### Python:
 ```python
 def is_apple(fruit):
     if fruit != "apple":
@@ -15,7 +16,7 @@ Traceback (most recent call last):
 ValueError: Fruit is not apple!
 ```
 
-Scala: 
+##### Scala:
 ```scala
 def is_apple(fruit:String) = {
     if (fruit != "apple") throw new IllegalArgumentException("Fruit is not apple!")
@@ -27,19 +28,19 @@ java.lang.IllegalArgumentException: Fruit is not apple!
   ... 33 elided
 ```
 
-Scala also has a try/catch/finally that behaves similarly to Python's try/except/finally: 
+Scala also has a try/catch/finally that behaves similarly to Python's try/except/finally:
 
-Python: 
+##### Python:
 ```python
 def check_fruit(fruit):
-    try: 
+    try:
         is_apple(fruit)
         print('No exception raised...')
-    except IOError: 
+    except IOError:
         print("Oh no! IOError!")
-    except ValueError as e: 
+    except ValueError as e:
         print(e.message)
-    finally: 
+    finally:
         print('This will excecute regardless of path.')
 
 >>> check_fruit("apple")
@@ -50,7 +51,7 @@ Fruit is not apple!
 This will excecute regardless of path.
 ```
 
-Scala: 
+##### Scala:
 ```scala
 import java.io.IOException
 def check_fruit(fruit:String) = {

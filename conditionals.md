@@ -1,7 +1,7 @@
 Conditional Expressions
 -----------------------
 
-Scala's if/else/else if will look very familiar to those who have written in C-style languages before:
+Scala's if/else/else-if will look very familiar to those who have written in C-style languages before:
 
 ##### Python
 ```python
@@ -10,7 +10,7 @@ Scala's if/else/else if will look very familiar to those who have written in C-s
 >>> foo = 1 if x > 0 else -1
 >>> foo
 -1
->> # Expressions broken across multiple lines
+# Expressions broken across multiple lines
 if x == 1:
     foo = 5
 elif x == 0:
@@ -55,8 +55,7 @@ scala> if (x == 0) baz = 6
 scala> baz
 res94: Int = 6
 
-scala> :paste
-// Entering paste mode (ctrl-D to finish)
+scala>
 
 if (foo.isInstanceOf[String]) {
     print("Foo is a string!")
@@ -65,8 +64,6 @@ if (foo.isInstanceOf[String]) {
 } else {
     print("I dont know what foo is...")
 }
-
-// Exiting paste mode, now interpreting.
 
 Foo is a string!
 ```
@@ -97,23 +94,19 @@ import scala.collection.mutable.ArrayBuffer
 scala> var nlist = ArrayBuffer[Int]()
 nlist: scala.collection.mutable.ArrayBuffer[Int] = ArrayBuffer()
 
-scala> :paste
-// Entering paste mode (ctrl-D to finish)
+scala>
 
 while (n < 5) {
     nlist += n
     n += 1
 }
 
-// Exiting paste mode, now interpreting.
-
-
 scala> nlist
 res115: scala.collection.mutable.ArrayBuffer[Int] = ArrayBuffer(0, 1, 2, 3, 4)
 }
 ```
 
-For loops and comprehensions. This is one thing that Scala brings to the Java world that is likely sorely missed by Python programmers writing in Java. Scala supports a `for (variable <- expression)` syntax. Let's look at Python first:
+For-loops and comprehensions, the latter of which is likely sorely missed by Python programmers writing Java. Scala supports a `for (variable <- expression)` syntax. Let's look at Python first:
 
 ##### Python
 ```python
@@ -127,20 +120,23 @@ for a in foo:
 
 ##### Scala
 ```scala
-// Going to stop using the :paste mode, you get the gist
-val foo = "Apple"
-var n = 0
+scala> val foo = "Apple"
+
+scala> var n = 0
+
+scala>
 for (x <- foo) {
     n += 1
 }
-n
 
-foo: String = Apple
-n: Int = 5
+scala> n
+res140: n: Int = 5
 
 // This would actually be better expressed in a single line
-n = 0
-for (x <- foo) n += 1
+scala> n = 0
+
+scala> for (x <- foo) n += 1
+
 scala> n
 res141: n: Int = 5
 ```
@@ -198,8 +194,8 @@ res7: scala.collection.mutable.Map[String,(Int, String)] = Map(banana -> (3,c), 
 // It's worth noting that Scala also has an explicit zip method
 val arr1 = Array(1, 2, 3)
 val arr2 = Array(4, 5, 6)
-arr1.zip(arr2)
 
+scala> arr1.zip(arr2)
 res240: Array[(Int, Int)] = Array((1,4), (2,5), (3,6))
 ```
 
@@ -244,7 +240,7 @@ scala> for (x <- (1 to 5).toArray if x != 2 if x != 3) yield x
 res44: Array[Int] = Array(1, 4, 5)
 ```
 
-Note that in many cases, it may be more concise to use `map` vs a for comprehension:
+Note that in many cases, it may be more concise to use `map` vs a for-comprehension:
 
 ##### Scala
 ```scala

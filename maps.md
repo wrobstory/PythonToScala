@@ -1,8 +1,9 @@
 Maps
+----
 
 Scala has both immutable and mutable map types, whereas Python has the single reliable (and fast!) Dict. Here's a comparison of methods that effectively do the same thing for the two:
 
-Python:
+##### Python:
 ```python
 fruit_count = {}
 fruit_count = {"apples": 4, "oranges": 5, "bananas": 6}
@@ -26,7 +27,7 @@ True
 [8, 2, 4, 5, 6]
 ```
 
-Scala:
+##### Scala:
 ```scala
 scala> val imm_fruit_count = Map("apples" -> 4, "oranges" -> 5, "bananas" -> 6)
 imm_fruit_count: scala.collection.mutable.Map[String,Int] = Map(bananas -> 6, oranges -> 5, apples -> 4)
@@ -70,14 +71,14 @@ res31: Int = 3
 
 Scala will let you iterate over maps in a similar way as Python:
 
-Python
+##### Python
 ```python
 >>> foo = [k + str(v) for k, v in fruit_count.items()]
 >>> foo
 ['peaches8', 'melons2', 'pears4', 'oranges5', 'bananas6']
 ```
 
-Scala
+##### Scala
 ```scala
 scala> val foo = ArrayBuffer[String]()
 foo: scala.collection.mutable.ArrayBuffer[String] = ArrayBuffer()
@@ -90,7 +91,7 @@ res237: scala.collection.mutable.ArrayBuffer[String] = ArrayBuffer(bananas6, ora
 
 A quick note: Scala has a SortedMap class that implements a tree map. The Python equivalent would be the OrderedDict in the collections module:
 
-Python:
+##### Python:
 ```python
 import collections
 foo = collections.OrderedDict(sorted({"apples": 4, "oranges": 5}.items()))
@@ -98,7 +99,7 @@ foo = collections.OrderedDict(sorted({"apples": 4, "oranges": 5}.items()))
 OrderedDict([('apples', 4), ('oranges', 5)])
 ```
 
-Scala:
+##### Scala:
 ```scala
 // PSA this is immutable
 scala> val scores = scala.collection.immutable.SortedMap("oranges" -> 5, "apples" -> 4)
