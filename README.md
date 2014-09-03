@@ -20,7 +20,7 @@ I recommend reading through the guide in the following order:
 9. Classes
 
 Here are some Scala topics not discussed above that I think are important to review: 
-* Pattern Matching. This is like a switch statement on turbo, and is very powerful and oft used. The [Scala Cookbook](http://shop.oreilly.com/product/0636920026914.do) has really great practical examples. 
-* Auxiliary Constructors. Classes can have multiple constructors that operate on different argument types/number of args. 
-* Case Classes as an immutable, record-like data-structure that can be pattern-matched.
-* Scala Collections. There is a lot of power in all of the methods available to data structures like Vector, Array, List, Sequence, Set, etc. Just take a [look](http://www.scala-lang.org/api/current/index.html#scala.collection.Seq) at all of the available methods. 
+* **Pattern Matching** This is like a switch statement on turbo, and is very powerful and oft used. The [Scala Cookbook](http://shop.oreilly.com/product/0636920026914.do) has really great practical examples. 
+* **Auxiliary Constructors** Classes can have multiple constructors that operate on different argument types/number of args. 
+* **Case Classes** as an immutable, record-like data-structure that can be pattern-matched.
+* **Scala Collections** There is a lot of power in all of the methods available to data structures like Vector, Array, List, Sequence, Set, etc. Just take a [look](http://www.scala-lang.org/api/current/index.html#scala.collection.Seq) at all of the available methods. 
