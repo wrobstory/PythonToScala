@@ -18,10 +18,12 @@ elif x == 0:
 >>> foo
 6
 >>>
-if isinstance('foo', str):
-    print('Foo is string')
+if isinstance(foo, str):
+    print('foo is string')
+elif isinstance(foo, int):
+    print('foo is int')
 else:
-    print('Foo is not string')
+    print('I dont know what foo is...')
 
 Foo is string
 ```
@@ -155,7 +157,7 @@ scala> for (f <- Array(1, 2, 3, 4, 5)) yield f + 1
 res59: Array[Int] = Array(2, 3, 4, 5, 6)
 ```
 
-Python has a very useful function called `zip` that will allow you to iterate over iterables at the same time. Scala will allow you to have multiple "generators" in an expression, which can replicate the zip behavior:
+Python has a very useful function called `zip` that will allow you to iterate over iterables at the same time. Scala also has a zip method which has the same functionality.
 
 ##### Python
 ```python
@@ -180,9 +182,9 @@ import scala.collection.mutable.Map
 // Let's go ahead and specify the types, since we know them
 var foobars= Map[String, Int]()
 
-for (f <- foo; b <- bar) foobars += (b -> f)
+for (x <- bar.zip(foo)) foobars += x
 scala> foobars
-res5: scala.collection.mutable.Map[String,Int] = Map(b -> 3, a -> 3, c -> 3)
+res5: scala.collection.mutable.Map[String,Int] = Map(b -> 2, a -> 1, c -> 3)
 
 // This is really powerful- we're not limited to two iterables
 val baz = Array("apple", "orange", "banana")
