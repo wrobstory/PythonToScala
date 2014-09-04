@@ -18,10 +18,12 @@ elif x == 0:
 >>> foo
 6
 >>>
-if isinstance('foo', str):
-    print('Foo is string')
+if isinstance(foo, str):
+    print('foo is string')
+elif isinstance(foo, int):
+    print('foo is int')
 else:
-    print('Foo is not string')
+    print('I dont know what foo is...')
 
 Foo is string
 ```
