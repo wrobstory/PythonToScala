@@ -186,7 +186,7 @@ res5: scala.collection.mutable.Map[String,Int] = Map(b -> 3, a -> 3, c -> 3)
 
 // This is really powerful- we're not limited to two iterables
 val baz = Array("apple", "orange", "banana")
-val mapped = Map[String, (Int, String)]()
+var mapped = Map[String, (Int, String)]() 
 for (f <- foo; b <- bar; z <- baz) mapped += (z -> (f, b))
 scala> mapped
 res7: scala.collection.mutable.Map[String,(Int, String)] = Map(banana -> (3,c), orange -> (3,c), apple -> (3,c))
