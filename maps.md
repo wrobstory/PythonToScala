@@ -30,7 +30,7 @@ True
 ##### Scala:
 ```scala
 scala> val imm_fruit_count = Map("apples" -> 4, "oranges" -> 5, "bananas" -> 6)
-imm_fruit_count: scala.collection.mutable.Map[String,Int] = Map(bananas -> 6, oranges -> 5, apples -> 4)
+imm_fruit_count: scala.collection.immutable.Map[String,Int] = Map(apples -> 4, oranges -> 5, bananas -> 6)
 
 scala> imm_fruit_count("apples")
 res219: Int = 4
